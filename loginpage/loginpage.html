@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login & Signup | Supabase Auth</title>
+  <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .form-container {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(15px);
+      padding: 30px;
+      border-radius: 20px;
+      width: 100%;
+      max-width: 350px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+      animation: fadeIn 0.8s ease;
+      color: #fff;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.2);
+      color: #fff;
+      font-size: 14px;
+    }
+
+    input::placeholder {
+      color: #e0e0e0;
+    }
+
+    .password-wrapper {
+      position: relative;
+    }
+
+    .toggle-password {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      font-size: 14px;
+      color: #ddd;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background: #4a90e2;
+      color: white;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      margin-top: 10px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: #357ABD;
+    }
+
+    .toggle-text {
+      margin-top: 15px;
+      text-align: center;
+    }
+
+    .toggle-text a {
+      color: #ffd700;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .toggle-text a:hover {
+      text-decoration: underline;
+    }
+
+    .loader {
+      display: none;
+      margin: 10px auto;
+      border: 4px solid #fff;
+      border-top: 4px solid #4a90e2;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+
+<div class="form-container" id="form-box">
+  <h2 id="form-title">Sign Up</h2>
+  <input type="text" id="name" placeholder="Name">
+  <input type="email" id="email" placeholder="Email">
+  <div class="password-wrapper">
+    <input type="password" id="password" placeholder="Password">
+    <span class="toggle-password" onclick="togglePassword()">👁️</span>
+  </div>
+  <div class="loader" id="loader"></div>
+  <button onclick="signup()" id="auth-button">Signup</button>
+  <div class="toggle-text" id="toggle-text">
+    Already have an account? <a href="#" onclick="switchToLogin()">Login</a>
+  </div>
+</div>
+
+<script>
+  // === Supabase Project Settings ===
+  const SUPABASE_URL = "https://gdkbgnwuljvbbezillyl.supabase.co";
+  const SUPABASE_KEY = "YOUR_PUBLIC_ANON_KEY_HERE";
+  const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+  let isLoginMode = false;
+
+  function togglePassword() {
+    const passInput = document.getElementById('password');
+    passInput.type = passInput.type === 'password' ? 'text' : 'password';
+  }
+
+  function showLoader(show) {
+    document.getElementById('loader').style.display = show ? 'block' : 'none';
+  }
+
+  async function signup() {
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value;
+
+    if (!name || !email || !password) {
+      alert("All fields are required.");
+      return;
+    }
+
+    showLoader(true);
+
+    const { data, error } = await supabase.auth.signUp({ email, password });
+
+    if (error) {
+      alert(error.message);
+    } else {
+      await supabase.from('profiles').insert([{ id: data.user.id, name }]);
+      alert("Signup successful! Please check your email.");
+      switchToLogin();
+    }
+
+    showLoader(false);
+  }
+
+  async function login() {
+    const email = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value;
+
+    if (!email || !password) {
+      alert("Email and password are required.");
+      return;
+    }
+
+    showLoader(true);
+
+    const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+
+    if (error) {
+      alert(error.message);
+    } else {
+      alert("Welcome back, " + email + "!");
+      // Redirect or store token if needed
+    }
+
+    showLoader(false);
+  }
+
+  function switchToLogin() {
+    isLoginMode = true;
+    document.getElementById('form-title').innerText = "Login";
+    document.getElementById('name').style.display = "none";
+    document.getElementById('auth-button').innerText = "Login";
+    document.getElementById('auth-button').onclick = login;
+    document.getElementById('toggle-text').innerHTML = `Don't have an account? <a href="#" onclick="switchToSignup()">Signup</a>`;
+  }
+
+  function switchToSignup() {
+    isLoginMode = false;
+    document.getElementById('form-title').innerText = "Sign Up";
+    document.getElementById('name').style.display = "block";
+    document.getElementById('auth-button').innerText = "Signup";
+    document.getElementById('auth-button').onclick = signup;
+    document.getElementById('toggle-text').innerHTML = `Already have an account? <a href="#" onclick="switchToLogin()">Login</a>`;
+  }
+</script>
+
+</body>
+</html>
