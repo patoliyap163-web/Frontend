@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sports Hub - Home</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    :root {
+      --bg: #ffffff;
+      --text: #111111;
+      --primary: #0066cc;
+      --card-bg: #f9f9f9;
+    }
+
+    [data-theme="dark"] {
+      --bg: #121212;
+      --text: #f0f0f0;
+      --primary: #66aaff;
+      --card-bg: #1e1e1e;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: var(--primary);
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    nav {
+      background-color: #eee;
+      padding: 1rem;
+      text-align: center;
+    }
+
+    nav a {
+      margin: 0 15px;
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    nav a:hover {
+      color: var(--primary);
+    }
+
+    .hero {
+      background-image: url('https://images.unsplash.com/photo-1505843271049-b58a1ccfbf59');
+      background-size: cover;
+      background-position: center;
+      color: white;
+      padding: 80px 20px;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 0.5rem;
+      text-shadow: 2px 2px 5px rgba(0,0,0,0.6);
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
+    }
+
+    .cards {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+
+    .card {
+      background-color: var(--card-bg);
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      width: 280px;
+      padding: 20px;
+      text-align: center;
+      transition: transform 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card h3 {
+      margin-top: 0;
+      color: var(--primary);
+    }
+
+    footer {
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      margin-top: 40px;
+    }
+
+    #dark-toggle {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 30px;
+      padding: 10px 20px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+
+    @media(max-width: 768px) {
+      .cards {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .hero h1 {
+        font-size: 2rem;
+      }
+
+      nav {
+        font-size: 0.95rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>🏆 Sports Hub</h1>
+    <p>Your ultimate destination for sports news and updates</p>
+  </header>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="news.html">News</a>
+    <a href="teams.html">Teams</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+
+  <section class="hero">
+    <h1>All Sports. One Platform.</h1>
+    <p>Stay updated on Football, Cricket, Basketball and more</p>
+  </section>
+
+  <section class="cards">
+    <div class="card">
+      <h3>⚽ Football</h3>
+      <p>Latest match results, league standings, and player stats from top leagues.</p>
+    </div>
+    <div class="card">
+      <h3>🏀 Basketball</h3>
+      <p>Catch up on NBA, EuroLeague, and major tournaments from around the globe.</p>
+    </div>
+    <div class="card">
+      <h3>🏏 Cricket</h3>
+      <p>Follow live scores, international fixtures, and ICC rankings in one place.</p>
+    </div>
+    <div class="card">
+      <h3>🎾 Tennis</h3>
+      <p>Don’t miss Grand Slam moments, player rankings, and daily match summaries.</p>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Sports Hub. All rights reserved.</p>
+  </footer>
+
+  <button id="dark-toggle">🌙 Dark Mode</button>
+
+  <script>
+    const btn = document.getElementById('dark-toggle');
+    const html = document.documentElement;
+
+    btn.addEventListener('click', () => {
+      const isDark = html.getAttribute('data-theme') === 'dark';
+      if (isDark) {
+        html.removeAttribute('data-theme');
+        btn.textContent = '🌙 Dark Mode';
+      } else {
+        html.setAttribute('data-theme', 'dark');
+        btn.textContent = '☀️ Light Mode';
+      }
+    });
+  </script>
+
+</body>
+</html>

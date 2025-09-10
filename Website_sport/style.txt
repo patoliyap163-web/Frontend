@@ -1,0 +1,63 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background-color: #f7f7f7;
+  color: #333;
+}
+header, nav, main, footer {
+  padding: 20px;
+  margin: 10px;
+  border-radius: 10px;
+}
+header, footer {
+  background-color: #222;
+  color: white;
+}
+nav {
+  background-color: #ddd;
+}
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  padding: 0;
+}
+nav a {
+  text-decoration: none;
+  font-weight: bold;
+  color: #333;
+}
+nav a:hover {
+  color: #0077cc;
+}
+main {
+  display: flex;
+  gap: 20px;
+}
+section {
+  flex: 3;
+  background-color: white;
+  padding: 20px;
+  border: 1px solid #ccc;
+}
+aside {
+  flex: 1;
+  background-color: #f0f0f0;
+  padding: 20px;
+  border: 1px solid #ccc;
+}
+form input, form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+}
+button {
+  padding: 10px 20px;
+  background-color: #0077cc;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+button:hover {
+  background-color: #005fa3;
+}

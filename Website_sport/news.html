@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sports Hub - News</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    :root {
+      --bg: #ffffff;
+      --text: #111111;
+      --primary: #0066cc;
+      --card-bg: #f9f9f9;
+    }
+
+    [data-theme="dark"] {
+      --bg: #121212;
+      --text: #f0f0f0;
+      --primary: #66aaff;
+      --card-bg: #1e1e1e;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+    }
+
+    header {
+      background-color: var(--primary);
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    nav {
+      background-color: #eee;
+      padding: 1rem;
+      text-align: center;
+    }
+
+    nav a {
+      margin: 0 15px;
+      text-decoration: none;
+      color: var(--text);
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      color: var(--primary);
+    }
+
+    main {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      padding: 30px;
+      justify-content: center;
+    }
+
+    section {
+      flex: 3;
+      min-width: 300px;
+    }
+
+    .news-card {
+      background: var(--card-bg);
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      transition: 0.3s;
+    }
+
+    .news-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .news-card h3 {
+      color: var(--primary);
+      margin-top: 0;
+    }
+
+    aside {
+      flex: 1;
+      min-width: 250px;
+      background: var(--card-bg);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      height: fit-content;
+    }
+
+    footer {
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      margin-top: 40px;
+    }
+
+    #dark-toggle {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 30px;
+      padding: 10px 20px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>📰 Sports News</h1>
+  </header>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="news.html">News</a>
+    <a href="teams.html">Teams</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+
+  <main>
+    <section>
+      <div class="news-card">
+        <h3>🏀 NBA Finals: Lakers vs. Celtics Showdown!</h3>
+        <p>Game 7 is here! The biggest rivals in basketball history meet again in an epic battle for the championship title.</p>
+      </div>
+
+      <div class="news-card">
+        <h3>⚽ Football Transfer Rumors</h3>
+        <p>Big names like Mbappe and Haaland could be on the move this summer. Here's what's heating up in the transfer market.</p>
+      </div>
+
+      <div class="news-card">
+        <h3>🎾 US Open Highlights</h3>
+        <p>The top seeds are holding strong, but a few dark horses are shaking things up. Catch up on the latest matches.</p>
+      </div>
+    </section>
+
+    <aside>
+      <h3>🚨 Breaking News</h3>
+      <p>Top sprinter breaks the 100m world record with a stunning 9.58s finish. Full story coming soon!</p>
+    </aside>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Sports Hub. All rights reserved.</p>
+  </footer>
+
+  <button id="dark-toggle">🌙 Dark Mode</button>
+
+  <script>
+    const btn = document.getElementById('dark-toggle');
+    const html = document.documentElement;
+
+    btn.addEventListener('click', () => {
+      const isDark = html.getAttribute('data-theme') === 'dark';
+      if (isDark) {
+        html.removeAttribute('data-theme');
+        btn.textContent = '🌙 Dark Mode';
+      } else {
+        html.setAttribute('data-theme', 'dark');
+        btn.textContent = '☀️ Light Mode';
+      }
+    });
+  </script>
+
+</body>
+</html>

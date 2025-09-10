@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sports Hub - Teams</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    :root {
+      --bg: #ffffff;
+      --text: #111111;
+      --primary: #0066cc;
+      --card-bg: #f9f9f9;
+    }
+
+    [data-theme="dark"] {
+      --bg: #121212;
+      --text: #f0f0f0;
+      --primary: #66aaff;
+      --card-bg: #1e1e1e;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+    }
+
+    header {
+      background-color: var(--primary);
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    nav {
+      background-color: #eee;
+      padding: 1rem;
+      text-align: center;
+    }
+
+    nav a {
+      margin: 0 15px;
+      text-decoration: none;
+      color: var(--text);
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      color: var(--primary);
+    }
+
+    main {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 30px;
+      gap: 20px;
+    }
+
+    .team-card {
+      background: var(--card-bg);
+      width: 300px;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      text-align: center;
+      transition: transform 0.3s;
+    }
+
+    .team-card:hover {
+      transform: translateY(-6px);
+    }
+
+    .team-card img {
+      width: 80px;
+      height: 80px;
+      margin-bottom: 15px;
+    }
+
+    footer {
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      margin-top: 40px;
+    }
+
+    #dark-toggle {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 30px;
+      padding: 10px 20px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>🏆 Featured Teams</h1>
+  </header>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="news.html">News</a>
+    <a href="teams.html">Teams</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+
+  <main>
+    <div class="team-card">
+      <img src="C:\Users\victus\OneDrive\Desktop\Website_sport\golden-st.png" alt="Warriors">
+      <h3>Golden State Warriors</h3>
+      <p>One of the NBA’s most dominant teams, known for 3-point shooting and fast play.</p>
+    </div>
+
+    <div class="team-card">
+      <img src="C:\Users\victus\OneDrive\Desktop\Website_sport\FC Barcelona team.jpeg" alt="Barcelona">
+      <h3>FC Barcelona</h3>
+      <p>Legendary football club with rich history, talent, and tiki-taka playing style.</p>
+    </div>
+
+    <div class="team-card">
+      <img src="C:\Users\victus\OneDrive\Desktop\Website_sport\Chennai Super Kings.jpeg" alt="CSK">
+      <h3>Chennai Super Kings</h3>
+      <p>Popular IPL team led by MS Dhoni with multiple championship wins.</p>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Sports Hub. All rights reserved.</p>
+  </footer>
+
+  <button id="dark-toggle">🌙 Dark Mode</button>
+
+  <script>
+    const btn = document.getElementById('dark-toggle');
+    const html = document.documentElement;
+
+    btn.addEventListener('click', () => {
+      const isDark = html.getAttribute('data-theme') === 'dark';
+      if (isDark) {
+        html.removeAttribute('data-theme');
+        btn.textContent = '🌙 Dark Mode';
+      } else {
+        html.setAttribute('data-theme', 'dark');
+        btn.textContent = '☀️ Light Mode';
+      }
+    });
+  </script>
+
+</body>
+</html>
